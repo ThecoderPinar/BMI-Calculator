@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="max-550">
+        <h2>BMI Calculator</h2>
+        <p>A <b>BMI Calculator</b> I Made for a personal project. Enter you height in cm and your weight in kg. </p>
+    
+        <form onsubmit="return calculateImc(this);" action="">
+            <label for="height">Height (cm)</label>
+            <input type="number" max="200" name="height" id="height" placeholder="180"><br><br>
+            <label for="weight">Weight (kg)</label>
+            <input type="number" max="300" name="weight" id="weight" placeholder="74.8"><br><br>
+            <input type="submit" value="Submit" class="button">
+          </form>
+      
+          <div>
+            <h4 id="imcData">IMC: </h4>
+            <div id="imcContainer">
+              <div id="IMCbar"></div>
+            </div>
+          </div><br>
+          <h3>What is the body mass index (BMI)?</h3>
+          <p>
+            The body mass index (BMI) is a measure that uses your height and weight to work out if your weight is healthy.
+            The BMI calculation divides an adult's weight in kilograms by their height in metres squared.
+          </p>
+          <h3>BMI ranges</h3>
+          <p>
+            If your BMI is:
+            <ul style="text-align:left">
+              <li> below 18.5    you're in the underweight range </li>
+              <li>between 18.5 and 24.9 – you're in the healthy weight range</li>
+              <li>between 25 and 29.9 – you're in the overweight range</li>
+              <li>between 30 and 39.9 – you're in the obese range</li>
+            </ul>
+             By the way the code is  <a href="https://github.com/ThecoderPinar" target="_blank">here</a>. And   <a href="https://codepen.io/reymon359/pen/OdXaMN" target="_blank">here</a> you can see it live
+          </p>
+      
+        </div><script src="https://cdn.jsdelivr.net/gh/reymon359/web-experiments/Social%20Signature/socialsignature.min.js" crossorigin="anonymous"></script>
+    
+    
+    
+    
+    
+    </div>
+</body>
+<script>
+    function calculateImc(form) {
+    let imcBar = document.getElementById('IMCbar');
+    let imcData = document.getElementById('imcData');
+    let imc = form.weight.value / ((form.height.value / 100) * (form.height.value / 100));
+    let imcText;
+    if (imc <= 18.5) {
+        imcText = 'Underweight';
+    } else if (imc > 18.5 && imc <= 25) {
+        imcText = 'Normal Weight';
+    } else if (imc > 25 && imc <= 30) {
+        imcText = 'Overweight';
+    } else if (imc > 30 && imc <= 35) {
+        imcText = 'Level 1 obesity';
+    } else if (imc > 35 && imc <= 40) {
+        imcText = 'Level 2 obesity';
+    } else if (imc > 40 && imc <= 50) {
+        imcText = 'Level 3 obesity';
+    } else if (imc > 50) {
+        imcText = 'Level 4 obesity';
+    }
+    if (imc <= 15) {
+        imcBar.style.width = '0%';
+    } else if (imc >= 50) { // si es 50 o mayor es 100%
+        imcBar.style.width = '100%';
+    } else { // If IMC wis between 15 and 50
+        imcBar.style.width = (((imc - 15) * 100) / 35) + '%';
+    }
+    imcData.innerHTML = `IMC: ${parseFloat(imc).toFixed(2)}  ${imcText}`;
+    return false;
+}
+
+</script>
+</html>
